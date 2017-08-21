@@ -29,7 +29,7 @@ export const createCourseSuccess = (course) => {
 };
 
 export const saveCourse = (course) => {
-  return function (dispatch, getState) {
+  return function (dispatch,getState) {
     return courseApi.saveCourse(course).then(savedCourse => {
       course.id ? dispatch(updateCourseSuccess(course)) :
         dispatch(createCourseSuccess(savedCourse));
