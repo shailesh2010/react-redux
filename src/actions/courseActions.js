@@ -19,3 +19,23 @@ export const loadCourses = () => {
     });
   });
 };
+
+export const updateCourseSuccess = (course) => {
+  return {type: actionTypes.UPDATE_COURSE_SUCCESS, course};
+};
+
+export const createCourseSuccess = (course) => {
+  return {type: actionTypes.CREATE_COURSES_SUCCESS, course};
+};
+
+export const saveCourse = (course) => {
+  return function (dispatch, getState) {
+    return courseApi.saveCourse(course).then(savedCourse => {
+      course.id ? dispatch(updateCourseSuccess(course)) :
+        dispatch(createCourseSuccess(savedCourse));
+    })
+    .catch(error => {
+      throw (error);
+    });
+  };
+};

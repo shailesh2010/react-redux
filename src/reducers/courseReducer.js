@@ -10,6 +10,16 @@ export default (state=initialState.courses, action) => {
       ];
     case actionTypes.LOAD_COURSES_SUCCESS:
       return  action.courses;
+    case actionTypes.UPDATE_COURSE_SUCCESS:
+      return  [
+        ...state.filter(course => course.id != action.course.id),
+        Object.assign({}, action.course)
+      ];
+    case actionTypes.CREATE_COURSES_SUCCESS:
+      return [
+        ...state,
+        Object.assign({}, action.course)
+      ];
     default:
       return state;
   }
